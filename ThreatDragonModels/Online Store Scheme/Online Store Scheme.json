@@ -1189,6 +1189,87 @@
               "cell": "b0f244d4-40a1-4097-b412-a857a8b324bd",
               "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "REST API Calls",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS TLS 1.2+",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "REST API Calls"
+            ],
+            "id": "947d20f4-3976-40bf-8bec-a7baa3425e52",
+            "source": {
+              "cell": "b0f244d4-40a1-4097-b412-a857a8b324bd",
+              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
+            },
+            "target": {
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead",
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead",
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead",
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead",
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead",
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
+            }
           }
         ],
         "description": "Data Flow Diagram untuk aplikasi toko online dengan semua komponen, data flows, dan threat identifications"
