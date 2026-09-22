@@ -255,7 +255,7 @@
           },
           {
             "position": {
-              "x": 940,
+              "x": 930,
               "y": 210
             },
             "size": {
@@ -1332,6 +1332,62 @@
             "target": {
               "cell": "0e7d5646-189f-4271-b1a2-0900b037207c",
               "port": "cf9e5d04-af85-40d2-8a93-3aa6f6eb865f"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Payment Request & Verification",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS REST API",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Payment Request & Verification"
+            ],
+            "id": "0088090e-e1fb-4769-a83e-f579aa3d1d02",
+            "source": {
+              "x": 700,
+              "y": 244
+            },
+            "target": {
+              "cell": "b8e7063c-041d-4318-8446-d743b30278ab",
+              "port": "18e547a0-db59-4f19-aa4c-17a480d640f5"
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
             }
           }
         ],
