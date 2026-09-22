@@ -375,13 +375,17 @@
                   "severity": "TBD",
                   "type": "Spoofing",
                   "description": "Provide a description for this threat",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Webhook Signature Verification (HMAC-SHA256)\nverify setiap webhook - CRITICAL\n2. Server-side Payment Status Verification\nquery payment provider untuk confirm - CRITICAL\n3. Idempotency Key\nunique key per payment, reject duplicate requests - HIGH\n4. Transaction Timeout\nauto-cancel pending setelah 15 menit - MEDIUM\n5. Merchant Key Rotation\nchange key setiap 6 bulan, support dual key - MEDIUM\n6. Payment Transaction Logging\nlog amount, status, timestamp, webhook result - HIGH\n7. Fraud Detection System\nalert jika amount > threshold atau unusual pattern - MEDIUM",
                   "modelType": "STRIDE",
-                  "new": true,
+                  "new": false,
                   "number": 6,
                   "score": ""
                 }
-              ]
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -690,7 +694,7 @@
                   "severity": "Medium",
                   "type": "Repudiation",
                   "description": "User dapat menyangkal bahwa mereka melakukan transaksi tertentu karena tidak ada proof",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Comprehensive Audit Logging\nuser_id, action, IP, user_agent, timestamp - HIGH\n2. Transaction Signing\nHMAC-SHA256(transaction_data + user_secret) - HIGH\n3. Immutable Transaction Records\nappend-only logs, no UPDATE/DELETE - HIGH\n4. Email Confirmation\nsend confirmation untuk setiap transaksi penting - MEDIUM\n5. 2FA untuk Sensitive Actions\nrequire OTP jika amount > threshold - MEDIUM\n6. Device Fingerprinting\nlog user_agent, IP, device fingerprint, geolocation - MEDIUM",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 10,
@@ -700,7 +704,7 @@
               "threatFrequency": {
                 "spoofing": 0,
                 "tampering": 0,
-                "repudiation": 1,
+                "repudiation": 2,
                 "informationDisclosure": 2,
                 "denialOfService": 2,
                 "elevationOfPrivilege": 2
@@ -832,7 +836,7 @@
                   "severity": "High",
                   "type": "Tampering",
                   "description": "Attacker dapat inject commands di email headers untuk spam atau unauthorized distribution",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Email Header Sanitization\nremove newlines, carriage returns, semicolons - HIGH\n2. Input Validation\nname: max 100 chars, alphanumeric + spaces only - MEDIUM\n3. Use Safe Template Engine\nHandlebars, EJS dengan automatic escaping - HIGH\n4. SPF, DKIM, DMARC Configuration\nprevent email spoofing - HIGH",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 11,
@@ -841,7 +845,7 @@
               ],
               "threatFrequency": {
                 "spoofing": 0,
-                "tampering": 1,
+                "tampering": 2,
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
@@ -1122,7 +1126,7 @@
                   "severity": "Critical",
                   "type": "Tampering",
                   "description": "Attacker dapat inject SQL commands melalui unsanitized input untuk mengakses atau memodifikasi database",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Parameterized Queries (WAJIB)\ngunakan ? placeholder atau named parameters - CRITICAL\n2. Input Validation & Sanitization\nwhitelist allowed characters - CRITICAL\n3. Use ORM Framework\nSequelize, TypeORM, atau Prisma dengan query builder - HIGH\n4. Database Least Privilege\napp user hanya SELECT, INSERT, UPDATE (no DROP/ALTER) - HIGH\n5. Error Handling\nhide database details, log server-side, return generic error - HIGH\n6. WAF Rules untuk SQL Injection\nModSecurity, AWS WAF SQL patterns - MEDIUM\n7. Regular Penetration Testing\nmonthly SAST, quarterly manual testing - HIGH",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 9,
@@ -1130,7 +1134,7 @@
                 }
               ],
               "threatFrequency": {
-                "tampering": 1,
+                "tampering": 2,
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0
