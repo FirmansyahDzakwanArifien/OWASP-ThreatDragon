@@ -689,8 +689,8 @@
                 "text": "Order\nService"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -787,12 +787,34 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "96c832ec-1c1f-4e8d-bd39-253149802e0e",
+                  "title": "SQL Injection via Unvalidated Input",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Tampering",
+                  "description": "Provide a description for this thrAttacker injects malicious SQL through order search, filtering, or customer name fields. Bypasses input validation and executes arbitrary SQL commands accessing unauthorized data or modifying database.eat",
+                  "mitigation": "Parameterized Queries & Input Validation\n\nUse parameterized queries (prepared statements) for all database operations. Implement whitelist input validation on all user-facing endpoints. Sanitize all input before use. Use ORM frameworks (e.g., Sequelize, TypeORM) that handle parameterization. ",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 12,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 1,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -1780,6 +1802,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 11
+    "threatTop": 12
   }
 }
