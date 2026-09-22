@@ -49,7 +49,8 @@
                 "0a3fc0a5-9184-4e91-b0b4-2f09689f1485",
                 "4edeef0e-a9ce-4258-8f19-495869ed7a88",
                 "c0e72a9f-158d-452b-b770-96c45546af9b",
-                "61b46dff-86b9-40bb-bbc9-e4b345780170"
+                "61b46dff-86b9-40bb-bbc9-e4b345780170",
+                "1dffe153-d740-4a39-88bb-019f7e284524"
               ],
               "containedElements": [
                 "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
@@ -83,9 +84,9 @@
               "isTrustBoundary": true,
               "hasOpenThreats": false,
               "crossingFlows": [
-                "1dffe153-d740-4a39-88bb-019f7e284524",
                 "44747a60-2d8c-43dc-a51d-7db25bf512f5",
-                "33e4eb3e-6585-42a3-92d7-576938dd0a33"
+                "33e4eb3e-6585-42a3-92d7-576938dd0a33",
+                "1dffe153-d740-4a39-88bb-019f7e284524"
               ],
               "containedElements": [
                 "345d5246-e715-45b2-8652-96dd722718bf",
@@ -649,6 +650,19 @@
                   "new": false,
                   "number": 4,
                   "score": ""
+                },
+                {
+                  "id": "877ddae0-a651-4ce8-95a7-64755b169ad1",
+                  "title": "JWT Token Claim Manipulation",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Elevation of privilege",
+                  "description": "\tAttacker modifies JWT token claims (user_id, role, permissions) by forging or exploiting weak signature validation. Gains access to admin functions or other users' data.",
+                  "mitigation": "Strong JWT Signature Validation & Algorithm Enforcement\n\nAlways validate JWT signature using HS256/RS256 (reject 'none' algorithm). Verify expiry timestamp (1 hour max). Validate issuer and audience claims. Implement token refresh mechanism with separate refresh tokens. Never trust client-supplied tokens without verification",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 11,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
@@ -657,7 +671,7 @@
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
-                "elevationOfPrivilege": 0
+                "elevationOfPrivilege": 1
               }
             }
           },
@@ -1260,60 +1274,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Auth Request",
-              "description": "Internal API call to validate credentials. HTTP/gRPC. Includes hashed credentials",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": [
-                "aecd7256-c77a-4205-b86e-fea5ad7cd39c"
-              ]
-            },
-            "labels": [
-              "Auth Request"
-            ],
-            "id": "1dffe153-d740-4a39-88bb-019f7e284524",
-            "source": {
-              "x": 802,
-              "y": 140
-            },
-            "target": {
-              "cell": "345d5246-e715-45b2-8652-96dd722718bf",
-              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
-            },
-            "vertices": [
-              {
-                "x": 680,
-                "y": 140
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Login Response",
               "description": "HTTPS response with JWT token. Set-Cookie header. HTTPOnly, Secure, SameSite flags",
               "outOfScope": false,
@@ -1759,12 +1719,67 @@
                 "y": 430
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Auth Request",
+              "description": "Internal API call to validate credentials. HTTP/gRPC. Includes hashed credentials",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "d225040a-675b-4bc8-bd8c-c8034539431a",
+                "aecd7256-c77a-4205-b86e-fea5ad7cd39c"
+              ]
+            },
+            "labels": [
+              "Auth Request"
+            ],
+            "id": "1dffe153-d740-4a39-88bb-019f7e284524",
+            "source": {
+              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
+              "port": "1f937c42-584e-4746-8bc6-7956b3f25b4d"
+            },
+            "target": {
+              "cell": "345d5246-e715-45b2-8652-96dd722718bf",
+              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+            },
+            "vertices": [
+              {
+                "x": 680,
+                "y": 140
+              }
+            ]
           }
         ]
       }
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 9
+    "threatTop": 11
   }
 }
