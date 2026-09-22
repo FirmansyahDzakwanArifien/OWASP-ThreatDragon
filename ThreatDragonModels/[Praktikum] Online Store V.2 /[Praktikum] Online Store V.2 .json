@@ -20,6 +20,40 @@
         "version": "2.6.2",
         "cells": [
           {
+            "shape": "trust-boundary-curve",
+            "width": 200,
+            "height": 100,
+            "zIndex": -1,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Boundary",
+              "name": "Internet / DMZ Boundary",
+              "description": "Trust boundary between public internet and demilitarized zone. Only API Gateway exposed. Rate limiting enforced",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "crossingFlows": [],
+              "containedElements": []
+            },
+            "labels": [
+              "Internet / DMZ Boundary"
+            ],
+            "id": "113c14e4-0125-47fb-a38b-a566723cfbec",
+            "source": {
+              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
+              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+            },
+            "target": {
+              "cell": "f3a59d1f-2f10-42c6-b5e4-757144c56891",
+              "port": "5bc672d8-613a-4ded-9f46-c241dc483940"
+            },
+            "vertices": [
+              {
+                "x": 720,
+                "y": 170
+              }
+            ]
+          },
+          {
             "position": {
               "x": 70,
               "y": 230
