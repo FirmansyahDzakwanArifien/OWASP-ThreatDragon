@@ -5,7 +5,7 @@
   "summary": {
     "title": "[Praktikum] Online Store V.2 ",
     "owner": "Firmansyah Dzakwan Arifien",
-    "description": "",
+    "description": "SYSTEM OVERVIEW:\nE-commerce platform utilizing multi-tier architecture with clear separation of concerns across three security zones (Internet, DMZ, Internal Network).\n\nSECURITY ARCHITECTURE:\n- API Gateway with rate limiting (100 req/minute per IP)\n- JWT token-based authentication (ASVS 2.1.1)\n- Password hashing with bcrypt (cost ≥12) (ASVS 2.4.1)\n- PostgreSQL database with AES-256 encryption at rest\n- Input validation on all endpoints (ASVS 5.1.3)\n- Webhook signature verification (HMAC-SHA256)\n- Comprehensive audit logging (ASVS 7.1.1)\n- Session management via Session Store (Redis)\n\nKEY SECURITY REQUIREMENTS:\nSR-01: JWT token validation on all protected endpoints [ASVS 2.1.1]\nSR-02: Password hashing with bcrypt cost minimum 12 [ASVS 2.4.1]\nSR-03: Input validation and sanitization [ASVS 5.1.3]\nSR-04: Audit logging for sensitive operations [ASVS 7.1.1]\nSR-05: Rate limiting on API endpoints [ASVS 2.2.1]\n\nTRUST BOUNDARIES:\n- TB-01: Internet ↔ DMZ (Public internet access)\n- TB-02: DMZ ↔ Internal Network (Backend services)",
     "id": 0
   },
   "detail": {
