@@ -651,7 +651,7 @@
                   "severity": "Critical",
                   "type": "Information disclosure",
                   "description": "Attacker dapat mengakses data customer yang sensitive melalui API endpoint yang tidak ter-protect",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "Encrypt Sensitive Data at Rest (AES-256)\n- Priority: Critical\n\nRole-Based Access Control (RBAC)\n- Priority: Critical\n\nData Masking pada API Responses\n- Priority: High\n\nParameterized Queries (Prevent SQL Injection)\n- Priority: Critical\n\nEncrypt Database Backups\n- Priority: High",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 3,
@@ -664,7 +664,7 @@
                   "severity": "High",
                   "type": "Denial of service",
                   "description": "Attacker dapat overload server dengan request volume tinggi",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Rate Limiting - 10 requests per minute per IP, exponential backoff - CRITICAL\n2. CAPTCHA untuk Forms Sensitive - Google reCAPTCHA v3 atau hCaptcha - HIGH\n3. DDoS Protection - CDN dengan built-in DDoS (CloudFlare, AWS CloudFront) - HIGH\n4. Database Connection Pooling - limit 20-50 connections, timeout 30 seconds - HIGH\n5. Request Queuing & Throttling - Bull queue, Redis-based queue - MEDIUM\n6. Email Rate Limiting - max 5 emails per minute per user - MEDIUM\n7. Web Application Firewall (WAF) - AWS WAF, ModSecurity, atau CloudFlare WAF - HIGH",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 4,
@@ -677,7 +677,7 @@
                   "severity": "Critical",
                   "type": "Elevation of privilege",
                   "description": "Regular user dapat mengakses admin functions atau escalate privilege mereka",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. JWT Role-Based Authorization\ninclude role dalam JWT, verify di setiap endpoint - CRITICAL\n2. Authorization Middleware\nverify user role sebelum handler execute - CRITICAL\n3. Multi-Factor Authentication (MFA) untuk Admin\nTOTP atau U2F key - CRITICAL\n4. IP Whitelisting untuk Admin Panel\nrestrict ke office/VPN IP - HIGH\n5. Audit Logging untuk Admin Actions\nlog CREATE, READ, UPDATE, DELETE - HIGH\n6. Admin Session Timeout\n15 menit inactivity, require re-authentication - MEDIUM\n7. Principle of Least Privilege \nSuper Admin, Product Manager, Order Manager roles - HIGH",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 5,
@@ -701,16 +701,16 @@
                 "spoofing": 0,
                 "tampering": 0,
                 "repudiation": 1,
-                "informationDisclosure": 1,
-                "denialOfService": 1,
-                "elevationOfPrivilege": 1
+                "informationDisclosure": 2,
+                "denialOfService": 2,
+                "elevationOfPrivilege": 2
               }
             }
           },
           {
             "position": {
               "x": 740,
-              "y": 40
+              "y": 30
             },
             "size": {
               "width": 100,
