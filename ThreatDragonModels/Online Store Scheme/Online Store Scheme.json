@@ -9,7 +9,11 @@
     "id": 0
   },
   "detail": {
-    "contributors": [],
+    "contributors": [
+      {
+        "name": "Firmansyah Dzakwan Arifien"
+      }
+    ],
     "diagrams": [
       {
         "id": 0,
