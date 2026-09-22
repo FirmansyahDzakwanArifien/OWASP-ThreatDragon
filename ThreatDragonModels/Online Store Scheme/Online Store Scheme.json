@@ -492,7 +492,7 @@
           },
           {
             "position": {
-              "x": 550,
+              "x": 600,
               "y": 190
             },
             "size": {
@@ -852,8 +852,8 @@
           },
           {
             "position": {
-              "x": 442,
-              "y": 373
+              "x": 430,
+              "y": 400
             },
             "size": {
               "width": 120,
@@ -976,8 +976,8 @@
           },
           {
             "position": {
-              "x": 640,
-              "y": 373
+              "x": 750,
+              "y": 400
             },
             "size": {
               "width": 120,
@@ -1235,40 +1235,103 @@
               "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
               "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
             },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead"
-              ],
-              "name": null
+            "vertices": [
+              {
+                "x": 570,
+                "y": 240
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Cache Operations",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "TCP with AUTH",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Cache Operations"
+            ],
+            "id": "b108a7f1-06e0-4603-bccc-3130754b23f1",
+            "source": {
+              "x": 650,
+              "y": 290
+            },
+            "target": {
+              "cell": "633f8a52-3f7e-4ae5-95ab-f1f3c954a59d",
+              "port": "cf9e5d04-af85-40d2-8a93-3aa6f6eb865f"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Database Queries",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "SSL/TLS",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Database Queries"
+            ],
+            "id": "8db10b43-a094-47d8-87f2-990c46491aa7",
+            "source": {
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "8d334fc2-eeab-42fc-9942-83fc612dc349"
+            },
+            "target": {
+              "cell": "0e7d5646-189f-4271-b1a2-0900b037207c",
+              "port": "cf9e5d04-af85-40d2-8a93-3aa6f6eb865f"
             }
           }
         ],
