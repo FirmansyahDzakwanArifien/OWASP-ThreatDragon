@@ -1097,6 +1097,98 @@
               "storesInventory": false,
               "threats": []
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "User Input & Browse",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS TLS 1.2+",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "User Input & Browse"
+            ],
+            "id": "24ed5649-428c-4af7-b08f-2505b575b750",
+            "source": {
+              "x": 223,
+              "y": 130
+            },
+            "target": {
+              "cell": "b0f244d4-40a1-4097-b412-a857a8b324bd",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Admin Management",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS TLS 1.2+",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Admin Management"
+            ],
+            "id": "249bdf06-3f17-4c79-a52f-a4a042da7aef",
+            "source": {
+              "cell": "0453066b-4186-48e5-8866-8436606dded2",
+              "port": "8d5a25c9-c9fe-41dd-b9ca-8faf320e887b"
+            },
+            "target": {
+              "cell": "b0f244d4-40a1-4097-b412-a857a8b324bd",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            }
           }
         ],
         "description": "Data Flow Diagram untuk aplikasi toko online dengan semua komponen, data flows, dan threat identifications"
