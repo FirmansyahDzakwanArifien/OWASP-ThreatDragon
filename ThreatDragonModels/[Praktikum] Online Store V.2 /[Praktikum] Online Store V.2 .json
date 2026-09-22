@@ -494,6 +494,19 @@
                   "new": false,
                   "number": 3,
                   "score": ""
+                },
+                {
+                  "id": "9b0e62a8-892a-4f1f-acd5-5a8ddce6cca4",
+                  "title": "New STRIDE threat",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": "Tampering",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": true,
+                  "number": 8,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
@@ -902,11 +915,13 @@
                 "text": "PostgreSQL Database"
               },
               "topLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               },
               "bottomLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -1003,13 +1018,33 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isALog": false,
               "isEncrypted": false,
               "isSigned": false,
               "storesCredentials": false,
               "storesInventory": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "589621c1-4336-4025-9bf0-1bccb22813c7",
+                  "title": "Sensitive Information Logged in Plain Text",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Error messages, query logs, or audit logs contain sensitive data (passwords, tokens, PII) in plain text. Developer debugging or log analysis exposes secrets.",
+                  "mitigation": "Title\tStructured Logging with PII Redaction\n\nImplement structured logging framework. Redact PII in logs (mask email, truncate names). Log sensitive operations to audit trail with metadata (user_id, timestamp, operation).",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             }
           },
           {
@@ -1710,6 +1745,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 6
+    "threatTop": 8
   }
 }
