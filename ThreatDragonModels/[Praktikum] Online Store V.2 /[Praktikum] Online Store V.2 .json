@@ -20,40 +20,6 @@
         "version": "2.6.2",
         "cells": [
           {
-            "shape": "trust-boundary-curve",
-            "width": 200,
-            "height": 100,
-            "zIndex": -1,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Boundary",
-              "name": "Internet / DMZ Boundary",
-              "description": "Trust boundary between public internet and demilitarized zone. Only API Gateway exposed. Rate limiting enforced",
-              "isTrustBoundary": true,
-              "hasOpenThreats": false,
-              "crossingFlows": [],
-              "containedElements": []
-            },
-            "labels": [
-              "Internet / DMZ Boundary"
-            ],
-            "id": "113c14e4-0125-47fb-a38b-a566723cfbec",
-            "source": {
-              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
-              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
-            },
-            "target": {
-              "cell": "f3a59d1f-2f10-42c6-b5e4-757144c56891",
-              "port": "5bc672d8-613a-4ded-9f46-c241dc483940"
-            },
-            "vertices": [
-              {
-                "x": 720,
-                "y": 170
-              }
-            ]
-          },
-          {
             "position": {
               "x": 70,
               "y": 230
@@ -649,8 +615,8 @@
           },
           {
             "position": {
-              "x": 824,
-              "y": 230
+              "x": 759,
+              "y": 100
             },
             "size": {
               "width": 70,
@@ -893,8 +859,8 @@
           },
           {
             "position": {
-              "x": 575,
-              "y": 385
+              "x": 670,
+              "y": 20
             },
             "size": {
               "width": 120,
@@ -1110,58 +1076,6 @@
               {
                 "x": 510,
                 "y": 170
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "JWT Token Response",
-              "description": "JWT token with claims (user_id, expiry, permissions). Signed with HS256. 1-hour expiry",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "JWT Token Response"
-            ],
-            "id": "c0e72a9f-158d-452b-b770-96c45546af9b",
-            "source": {
-              "x": 430,
-              "y": 258
-            },
-            "target": {
-              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
-              "port": "1f937c42-584e-4746-8bc6-7956b3f25b4d"
-            },
-            "vertices": [
-              {
-                "x": 500,
-                "y": 210
               }
             ]
           },
@@ -1455,13 +1369,65 @@
             ],
             "id": "33e4eb3e-6585-42a3-92d7-576938dd0a33",
             "source": {
-              "x": 894,
+              "x": 854,
               "y": 265
             },
             "target": {
               "cell": "674c2a26-61dd-48dd-826c-2ef4d413bfe3",
               "port": "dbc763d8-617a-41d8-bbfb-000de882d53f"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "JWT Token Response",
+              "description": "JWT token with claims (user_id, expiry, permissions). Signed with HS256. 1-hour expiry",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "JWT Token Response"
+            ],
+            "id": "c0e72a9f-158d-452b-b770-96c45546af9b",
+            "source": {
+              "x": 430,
+              "y": 258
+            },
+            "target": {
+              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
+              "port": "1f937c42-584e-4746-8bc6-7956b3f25b4d"
+            },
+            "vertices": [
+              {
+                "x": 500,
+                "y": 210
+              }
+            ]
           },
           {
             "shape": "flow",
@@ -1506,12 +1472,12 @@
             },
             "target": {
               "cell": "7b753770-887b-4602-a05b-7b6a1a4a148b",
-              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+              "port": "6139cd97-cd72-46a2-a7e0-c7b4898a129b"
             },
             "vertices": [
               {
-                "x": 990,
-                "y": 200
+                "x": 1000,
+                "y": 180
               }
             ]
           }
