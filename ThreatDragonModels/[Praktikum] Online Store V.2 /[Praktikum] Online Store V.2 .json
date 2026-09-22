@@ -1634,7 +1634,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1655,16 +1656,35 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
+              "threats": [
+                {
+                  "id": "6b5f25d4-8f6a-4d90-8819-d96d00b164b5",
+                  "title": "Webhook Signature Validation Bypass",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Tampering",
+                  "description": "Attacker sends forged webhook notification to Payment API claiming payment success without valid signature. ",
+                  "mitigation": "HMAC-SHA256 Webhook Signature Verification\n\nVerify all webhook requests with HMAC-SHA256 signature. Compare signature from webhook header with server-side computed signature. Use strong webhook secret (256-bit key). Verify timestamp to prevent replay attacks. Implement webhook secret rotation annually.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
+                }
+              ],
               "trustBoundaryIds": [
                 "d225040a-675b-4bc8-bd8c-c8034539431a",
                 "10b11803-39a6-4d17-a5c5-708d46c37f04"
-              ]
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Webhook Callback"
@@ -1745,6 +1765,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 8
+    "threatTop": 9
   }
 }
