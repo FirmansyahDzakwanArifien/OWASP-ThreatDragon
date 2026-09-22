@@ -69,7 +69,7 @@
             },
             "attrs": {
               "label": {
-                "text": "Trust Boundary"
+                "text": "DMZ / Internal Boundary"
               }
             },
             "visible": true,
@@ -78,7 +78,7 @@
             "zIndex": -1,
             "data": {
               "type": "tm.BoundaryBox",
-              "name": "Trust Boundary",
+              "name": "DMZ / Internal Boundary",
               "description": "",
               "isTrustBoundary": true,
               "hasOpenThreats": false,
@@ -91,6 +91,42 @@
                 "345d5246-e715-45b2-8652-96dd722718bf",
                 "3c2aa2d0-2bcc-48a5-937b-feb3508e05ab",
                 "c96414dc-01ef-4dea-9ecf-90fc8fd3f1aa"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 231.25,
+              "y": 140
+            },
+            "size": {
+              "width": 130,
+              "height": 290
+            },
+            "attrs": {
+              "label": {
+                "text": "Internet"
+              }
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "id": "10b11803-39a6-4d17-a5c5-708d46c37f04",
+            "zIndex": -1,
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "Internet",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "crossingFlows": [
+                "dbea9d82-86eb-4595-9be9-510cf6df3d98",
+                "0a3fc0a5-9184-4e91-b0b4-2f09689f1485",
+                "61b46dff-86b9-40bb-bbc9-e4b345780170",
+                "33e4eb3e-6585-42a3-92d7-576938dd0a33"
+              ],
+              "containedElements": [
+                "6a4e630d-fe6f-41d2-8960-77ff8630c769",
+                "674c2a26-61dd-48dd-826c-2ef4d413bfe3"
               ]
             }
           },
@@ -934,8 +970,8 @@
           },
           {
             "position": {
-              "x": 1020,
-              "y": 50
+              "x": 1010,
+              "y": 45
             },
             "size": {
               "width": 120,
@@ -1190,7 +1226,8 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "d225040a-675b-4bc8-bd8c-c8034539431a"
+                "d225040a-675b-4bc8-bd8c-c8034539431a",
+                "10b11803-39a6-4d17-a5c5-708d46c37f04"
               ]
             },
             "labels": [
@@ -1238,7 +1275,8 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "d225040a-675b-4bc8-bd8c-c8034539431a"
+                "d225040a-675b-4bc8-bd8c-c8034539431a",
+                "10b11803-39a6-4d17-a5c5-708d46c37f04"
               ]
             },
             "labels": [
@@ -1504,7 +1542,8 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "d225040a-675b-4bc8-bd8c-c8034539431a"
+                "d225040a-675b-4bc8-bd8c-c8034539431a",
+                "10b11803-39a6-4d17-a5c5-708d46c37f04"
               ]
             },
             "labels": [
@@ -1558,7 +1597,8 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "aecd7256-c77a-4205-b86e-fea5ad7cd39c"
+                "aecd7256-c77a-4205-b86e-fea5ad7cd39c",
+                "10b11803-39a6-4d17-a5c5-708d46c37f04"
               ]
             },
             "labels": [
