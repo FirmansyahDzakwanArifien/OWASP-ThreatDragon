@@ -615,8 +615,8 @@
           },
           {
             "position": {
-              "x": 814,
-              "y": 225
+              "x": 824,
+              "y": 230
             },
             "size": {
               "width": 70,
@@ -1336,6 +1336,52 @@
                 "y": 300
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Initiate Payment",
+              "description": "HTTPS request to Payment API wrapper with order_id, amount, customer info (encrypted)",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Initiate Payment"
+            ],
+            "id": "4edeef0e-a9ce-4258-8f19-495869ed7a88",
+            "source": {
+              "x": 670,
+              "y": 265
+            },
+            "target": {
+              "cell": "7b753770-887b-4602-a05b-7b6a1a4a148b",
+              "port": "30f46015-1dfd-4bcf-8615-dae037e069dd"
+            }
           }
         ]
       }
