@@ -520,8 +520,8 @@
                 "text": "Auth\nService"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -618,12 +618,34 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "5721496f-3273-4ce1-90ab-c743041a691b",
+                  "title": "Weak Password Hashing Leading to Credential Compromise",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Spoofing",
+                  "description": "If passwords are hashed with weak algorithms or low iteration counts, attackers with database access can brute-force credentials offline using rainbow tables.",
+                  "mitigation": "Implement Bcrypt with Minimum Cost 12\n\nUse bcrypt with cost parameter ≥12 for all password hashing. Bcrypt automatically handles salt and provides adaptive hashing",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -1647,6 +1669,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 3
+    "threatTop": 4
   }
 }
