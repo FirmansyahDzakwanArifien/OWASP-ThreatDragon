@@ -1101,6 +1101,58 @@
               ],
               "name": null
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Auth Request",
+              "description": "Internal API call to validate credentials. HTTP/gRPC. Includes hashed credentials",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Auth Request"
+            ],
+            "id": "1dffe153-d740-4a39-88bb-019f7e284524",
+            "source": {
+              "x": 632,
+              "y": 170
+            },
+            "target": {
+              "cell": "345d5246-e715-45b2-8652-96dd722718bf",
+              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+            },
+            "vertices": [
+              {
+                "x": 510,
+                "y": 170
+              }
+            ]
           }
         ]
       }
