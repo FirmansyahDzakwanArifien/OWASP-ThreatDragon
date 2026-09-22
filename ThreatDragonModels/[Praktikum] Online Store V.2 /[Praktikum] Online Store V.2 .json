@@ -497,14 +497,14 @@
                 },
                 {
                   "id": "9b0e62a8-892a-4f1f-acd5-5a8ddce6cca4",
-                  "title": "New STRIDE threat",
+                  "title": "DoS Attack via Rate Limit Bypass",
                   "status": "Open",
-                  "severity": "TBD",
-                  "type": "Tampering",
-                  "description": "Provide a description for this threat",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "severity": "High",
+                  "type": "Denial of service",
+                  "description": "Attacker bypasses rate limiting using distributed IPs, botnet, or header manipulation (X-Forwarded-For spoofing). Floods API Gateway with requests causing service unavailability",
+                  "mitigation": "Multi-Layer Rate Limiting with WAF\n\nImplement rate limiting on multiple layers: \n(1) Per-IP limit (100 req/min), \n(2) Per-user limit (1000 req/hour), \n(3) Endpoint-specific limits, \n(4) Deploy Web Application Firewall (WAF) to detect/block botnet traffic",
                   "modelType": "STRIDE",
-                  "new": true,
+                  "new": false,
                   "number": 8,
                   "score": ""
                 }
@@ -514,7 +514,7 @@
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
-                "denialOfService": 0,
+                "denialOfService": 1,
                 "elevationOfPrivilege": 0
               }
             }
