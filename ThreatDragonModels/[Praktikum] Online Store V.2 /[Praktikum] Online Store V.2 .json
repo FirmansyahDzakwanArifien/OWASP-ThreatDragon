@@ -1,0 +1,28 @@
+{
+  "version": "2.6.2",
+  "release_version": "V.2",
+  "released_at": "2026-09-22",
+  "summary": {
+    "title": "[Praktikum] Online Store V.2 ",
+    "owner": "Firmansyah Dzakwan Arifien",
+    "description": "",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "DFD",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.6.2",
+        "cells": []
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "April Rustianto",
+    "threatTop": 0
+  }
+}
