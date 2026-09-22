@@ -376,7 +376,7 @@
           {
             "position": {
               "x": 360,
-              "y": 225
+              "y": 230
             },
             "size": {
               "width": 70,
@@ -496,7 +496,7 @@
           {
             "position": {
               "x": 600,
-              "y": 225
+              "y": 230
             },
             "size": {
               "width": 70,
@@ -1230,6 +1230,58 @@
               {
                 "x": 410,
                 "y": 120
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Create Order",
+              "description": "Internal API call with JWT validation. Passes validated order details and user context.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Create Order"
+            ],
+            "id": "44747a60-2d8c-43dc-a51d-7db25bf512f5",
+            "source": {
+              "x": 630,
+              "y": 170
+            },
+            "target": {
+              "cell": "3c2aa2d0-2bcc-48a5-937b-feb3508e05ab",
+              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+            },
+            "vertices": [
+              {
+                "x": 630,
+                "y": 190
               }
             ]
           }
