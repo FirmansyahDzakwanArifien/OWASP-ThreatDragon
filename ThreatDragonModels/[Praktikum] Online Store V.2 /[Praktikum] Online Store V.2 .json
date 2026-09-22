@@ -1176,6 +1176,62 @@
               "cell": "6a4e630d-fe6f-41d2-8960-77ff8630c769",
               "port": "0041ec01-e382-47f4-bf13-2c95d75bf268"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Order Request",
+              "description": "HTTPS POST with JWT bearer token. Contains order details (items, quantity, address)",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Order Request"
+            ],
+            "id": "0a3fc0a5-9184-4e91-b0b4-2f09689f1485",
+            "source": {
+              "cell": "6a4e630d-fe6f-41d2-8960-77ff8630c769",
+              "port": "0041ec01-e382-47f4-bf13-2c95d75bf268"
+            },
+            "target": {
+              "cell": "2d7ddf5b-93be-4baf-ab12-d706b7cb7f16",
+              "port": "1db68060-74ee-4af9-b521-d9327d533c2d"
+            },
+            "vertices": [
+              {
+                "x": 260,
+                "y": 190
+              },
+              {
+                "x": 410,
+                "y": 120
+              }
+            ]
           }
         ]
       }
