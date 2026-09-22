@@ -267,8 +267,8 @@
                 "text": "Payment\nGateway"
               },
               "body": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -365,25 +365,11 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "providesAuthentication": false,
-              "threats": [
-                {
-                  "id": "4e5a6d84-6e6b-4521-b697-efbcf22cb62c",
-                  "title": "New STRIDE threat",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": "Spoofing",
-                  "description": "Provide a description for this threat",
-                  "mitigation": "1. Webhook Signature Verification (HMAC-SHA256)\nverify setiap webhook - CRITICAL\n2. Server-side Payment Status Verification\nquery payment provider untuk confirm - CRITICAL\n3. Idempotency Key\nunique key per payment, reject duplicate requests - HIGH\n4. Transaction Timeout\nauto-cancel pending setelah 15 menit - MEDIUM\n5. Merchant Key Rotation\nchange key setiap 6 bulan, support dual key - MEDIUM\n6. Payment Transaction Logging\nlog amount, status, timestamp, webhook result - HIGH\n7. Fraud Detection System\nalert jika amount > threshold atau unusual pattern - MEDIUM",
-                  "modelType": "STRIDE",
-                  "new": false,
-                  "number": 6,
-                  "score": ""
-                }
-              ],
+              "threats": [],
               "threatFrequency": {
-                "spoofing": 1,
+                "spoofing": 0,
                 "repudiation": 0
               }
             }
@@ -1592,7 +1578,7 @@
                   "severity": "Critical",
                   "type": "Tampering",
                   "description": "Attacker dapat memanipulasi status transaksi pembayaran tanpa benar-benar melakukan pembayaran",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "mitigation": "1. Webhook Signature Verification (HMAC-SHA256)\nverify setiap webhook - CRITICAL\n2. Server-side Payment Status Verification\nquery payment provider untuk confirm - CRITICAL\n3. Idempotency Key\nunique key per payment, reject duplicate requests - HIGH\n4. Transaction Timeout\nauto-cancel pending setelah 15 menit - MEDIUM\n5. Merchant Key Rotation\nchange key setiap 6 bulan, support dual key - MEDIUM\n6. Payment Transaction Logging\nlog amount, status, timestamp, webhook result - HIGH\n7. Fraud Detection System\nalert jika amount > threshold atau unusual pattern - MEDIUM",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 8,
@@ -1601,7 +1587,7 @@
               ],
               "trustBoundaryIds": [],
               "threatFrequency": {
-                "tampering": 1,
+                "tampering": 2,
                 "informationDisclosure": 0,
                 "denialOfService": 0
               }
