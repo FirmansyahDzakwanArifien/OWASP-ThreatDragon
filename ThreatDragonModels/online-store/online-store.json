@@ -5,13 +5,24 @@
   "summary": {
     "title": "online-store",
     "owner": "Firmansyah Dzakwan Arifien",
-    "description": "",
+    "description": "Threat model untuk aplikasi e-commerce dengan React Frontend, Node.js API, MySQL DB, Redis Cache, dan Payment Gateway (Midtrans/Xendit)",
     "id": 0
   },
   "detail": {
     "contributors": [],
-    "diagrams": [],
-    "diagramTop": 1,
+    "diagrams": [
+      {
+        "id": 1,
+        "title": "New STRIDE diagram",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.6.2",
+        "cells": [],
+        "description": "Data Flow Diagram (DFD)"
+      }
+    ],
+    "diagramTop": 2,
     "reviewer": "April Rustianto",
     "threatTop": 0
   }
