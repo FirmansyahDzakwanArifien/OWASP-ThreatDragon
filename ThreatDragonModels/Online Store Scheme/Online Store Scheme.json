@@ -88,7 +88,8 @@
                 "249bdf06-3f17-4c79-a52f-a4a042da7aef",
                 "947d20f4-3976-40bf-8bec-a7baa3425e52",
                 "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
-                "0088090e-e1fb-4769-a83e-f579aa3d1d02"
+                "0088090e-e1fb-4769-a83e-f579aa3d1d02",
+                "c14478ae-c712-4f1b-8c88-53130b735a31"
               ],
               "containedElements": [
                 "b0f244d4-40a1-4097-b412-a857a8b324bd",
@@ -123,6 +124,7 @@
               "crossingFlows": [
                 "947d20f4-3976-40bf-8bec-a7baa3425e52",
                 "b108a7f1-06e0-4603-bccc-3130754b23f1",
+                "c14478ae-c712-4f1b-8c88-53130b735a31",
                 "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f"
               ],
               "containedElements": [
@@ -814,8 +816,8 @@
           },
           {
             "position": {
-              "x": 750,
-              "y": 50
+              "x": 790,
+              "y": 120
             },
             "size": {
               "width": 100,
@@ -1094,7 +1096,10 @@
                 "denialOfService": 0,
                 "elevationOfPrivilege": 0
               }
-            }
+            },
+            "children": [
+              "4cad8fd8-394f-44c1-8954-b829f614b865"
+            ]
           },
           {
             "position": {
@@ -1662,106 +1667,6 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Token Validation Request",
-              "description": "setiap request yang butuh auth, API Server delegasikan validasi JWT ke Auth Module",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": [
-                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
-              ]
-            },
-            "labels": [
-              "Token Validation Request"
-            ],
-            "id": "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f",
-            "source": {
-              "x": 680,
-              "y": 180
-            },
-            "target": {
-              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
-              "port": "8d334fc2-eeab-42fc-9942-83fc612dc349"
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Token Validation Result",
-              "description": "hasil validasi dikirim balik",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Token Validation Result"
-            ],
-            "id": "41f5d7fe-8691-47de-a987-48de39634041",
-            "source": {
-              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
-              "port": "319f073b-6a25-4f26-a2a5-5f8dbde5fdb0"
-            },
-            "target": {
-              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
-              "port": "319f073b-6a25-4f26-a2a5-5f8dbde5fdb0"
-            },
-            "vertices": [
-              {
-                "x": 700,
-                "y": 40
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
                 "stroke": "red",
                 "strokeWidth": 2.5,
                 "targetMarker": {
@@ -1877,6 +1782,215 @@
               "port": "3ee03b57-7151-4583-b42a-09123440367a"
             },
             "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Forwarded Request\nInternal Https",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "201c916e-de8b-4410-b41a-9ae8914bb96e",
+                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
+              ]
+            },
+            "labels": [
+              "Forwarded Request\nInternal Https"
+            ],
+            "id": "c14478ae-c712-4f1b-8c88-53130b735a31",
+            "source": {
+              "cell": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
+              "port": "2804ffa6-2659-40aa-8335-b00987ad5206"
+            },
+            "target": {
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            },
+            "vertices": [
+              {
+                "x": 520,
+                "y": 180
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Token Validation Result",
+              "description": "hasil validasi dikirim balik",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Token Validation Result"
+            ],
+            "id": "41f5d7fe-8691-47de-a987-48de39634041",
+            "source": {
+              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
+              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
+            },
+            "target": {
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "319f073b-6a25-4f26-a2a5-5f8dbde5fdb0"
+            },
+            "vertices": [
+              {
+                "x": 710,
+                "y": 130
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Data Flow",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Data Flow"
+            ],
+            "id": "4cad8fd8-394f-44c1-8954-b829f614b865",
+            "source": {
+              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
+              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
+            },
+            "target": {
+              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
+              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
+            },
+            "vertices": [],
+            "parent": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181"
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Token Validation Request",
+              "description": "setiap request yang butuh auth, API Server delegasikan validasi JWT ke Auth Module",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
+              ]
+            },
+            "labels": [
+              "Token Validation Request"
+            ],
+            "id": "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f",
+            "source": {
+              "x": 680,
+              "y": 180
+            },
+            "target": {
+              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            },
+            "vertices": [
+              {
+                "x": 570,
+                "y": 140
+              }
+            ]
           },
           {
             "position": {
