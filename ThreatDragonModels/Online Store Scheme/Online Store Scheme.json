@@ -39,8 +39,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
             "zIndex": -1,
+            "id": "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Internet",
@@ -75,8 +75,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "201c916e-de8b-4410-b41a-9ae8914bb96e",
             "zIndex": -1,
+            "id": "201c916e-de8b-4410-b41a-9ae8914bb96e",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "DMZ",
@@ -86,10 +86,13 @@
               "crossingFlows": [
                 "24ed5649-428c-4af7-b08f-2505b575b750",
                 "249bdf06-3f17-4c79-a52f-a4a042da7aef",
-                "947d20f4-3976-40bf-8bec-a7baa3425e52"
+                "947d20f4-3976-40bf-8bec-a7baa3425e52",
+                "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
+                "0088090e-e1fb-4769-a83e-f579aa3d1d02"
               ],
               "containedElements": [
-                "b0f244d4-40a1-4097-b412-a857a8b324bd"
+                "b0f244d4-40a1-4097-b412-a857a8b324bd",
+                "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e"
               ]
             }
           },
@@ -109,8 +112,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "5df934a1-6feb-4bf4-8852-c5b99fd36e24",
             "zIndex": -1,
+            "id": "5df934a1-6feb-4bf4-8852-c5b99fd36e24",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Internal Network\n",
@@ -120,8 +123,6 @@
               "crossingFlows": [
                 "947d20f4-3976-40bf-8bec-a7baa3425e52",
                 "b108a7f1-06e0-4603-bccc-3130754b23f1",
-                "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
-                "0088090e-e1fb-4769-a83e-f579aa3d1d02",
                 "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f"
               ],
               "containedElements": [
@@ -369,7 +370,7 @@
           },
           {
             "position": {
-              "x": 110,
+              "x": 109.99999999999972,
               "y": 90
             },
             "size": {
@@ -1615,81 +1616,6 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Webhook Callback",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": true,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "HTTPS Webhook",
-              "threats": [
-                {
-                  "id": "13d24079-968d-49f0-8b10-7a7fc284ef3e",
-                  "title": "Tampering Transaksi Pembayaran",
-                  "status": "Open",
-                  "severity": "Critical",
-                  "type": "Tampering",
-                  "description": "Attacker dapat memanipulasi status transaksi pembayaran tanpa benar-benar melakukan pembayaran",
-                  "mitigation": "1. Webhook Signature Verification (HMAC-SHA256)\nverify setiap webhook - CRITICAL\n2. Server-side Payment Status Verification\nquery payment provider untuk confirm - CRITICAL\n3. Idempotency Key\nunique key per payment, reject duplicate requests - HIGH\n4. Transaction Timeout\nauto-cancel pending setelah 15 menit - MEDIUM\n5. Merchant Key Rotation\nchange key setiap 6 bulan, support dual key - MEDIUM\n6. Payment Transaction Logging\nlog amount, status, timestamp, webhook result - HIGH\n7. Fraud Detection System\nalert jika amount > threshold atau unusual pattern - MEDIUM",
-                  "modelType": "STRIDE",
-                  "new": false,
-                  "number": 8,
-                  "score": ""
-                }
-              ],
-              "trustBoundaryIds": [
-                "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
-                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
-              ],
-              "threatFrequency": {
-                "tampering": 2,
-                "informationDisclosure": 0,
-                "denialOfService": 0
-              }
-            },
-            "labels": [
-              "Webhook Callback"
-            ],
-            "id": "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
-            "source": {
-              "cell": "b8e7063c-041d-4318-8446-d743b30278ab",
-              "port": "b30a5797-dda1-412a-977c-39a9cff098bd"
-            },
-            "target": {
-              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
-              "port": "319f073b-6a25-4f26-a2a5-5f8dbde5fdb0"
-            },
-            "vertices": [
-              {
-                "x": 480,
-                "y": 110
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
                 "stroke": "#333333",
                 "targetMarker": {
                   "name": "block"
@@ -1731,61 +1657,6 @@
               "cell": "a48fc9b2-99cd-49aa-80a4-2739ef5fd22c",
               "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
             }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Payment Request & Verification",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "HTTPS REST API",
-              "threats": [],
-              "trustBoundaryIds": [
-                "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
-                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
-              ]
-            },
-            "labels": [
-              "Payment Request & Verification"
-            ],
-            "id": "0088090e-e1fb-4769-a83e-f579aa3d1d02",
-            "source": {
-              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
-              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
-            },
-            "target": {
-              "cell": "b8e7063c-041d-4318-8446-d743b30278ab",
-              "port": "18e547a0-db59-4f19-aa4c-17a480d640f5"
-            },
-            "vertices": [
-              {
-                "x": 400,
-                "y": 150
-              }
-            ]
           },
           {
             "shape": "flow",
@@ -1886,6 +1757,246 @@
                 "y": 40
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Webhook Callback",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS Webhook",
+              "threats": [
+                {
+                  "id": "13d24079-968d-49f0-8b10-7a7fc284ef3e",
+                  "title": "Tampering Transaksi Pembayaran",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Tampering",
+                  "description": "Attacker dapat memanipulasi status transaksi pembayaran tanpa benar-benar melakukan pembayaran",
+                  "mitigation": "1. Webhook Signature Verification (HMAC-SHA256)\nverify setiap webhook - CRITICAL\n2. Server-side Payment Status Verification\nquery payment provider untuk confirm - CRITICAL\n3. Idempotency Key\nunique key per payment, reject duplicate requests - HIGH\n4. Transaction Timeout\nauto-cancel pending setelah 15 menit - MEDIUM\n5. Merchant Key Rotation\nchange key setiap 6 bulan, support dual key - MEDIUM\n6. Payment Transaction Logging\nlog amount, status, timestamp, webhook result - HIGH\n7. Fraud Detection System\nalert jika amount > threshold atau unusual pattern - MEDIUM",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [
+                "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
+                "201c916e-de8b-4410-b41a-9ae8914bb96e"
+              ],
+              "threatFrequency": {
+                "tampering": 2,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
+            },
+            "labels": [
+              "Webhook Callback"
+            ],
+            "id": "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
+            "source": {
+              "cell": "b8e7063c-041d-4318-8446-d743b30278ab",
+              "port": "b30a5797-dda1-412a-977c-39a9cff098bd"
+            },
+            "target": {
+              "cell": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
+              "port": "950b0d4c-b147-49fe-9ecb-ad0bcb95e3e8"
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Payment Request & Verification",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "HTTPS REST API",
+              "threats": [],
+              "trustBoundaryIds": [
+                "016cbe86-6bfb-4772-8445-9a0b8fb576f4",
+                "201c916e-de8b-4410-b41a-9ae8914bb96e"
+              ]
+            },
+            "labels": [
+              "Payment Request & Verification"
+            ],
+            "id": "0088090e-e1fb-4769-a83e-f579aa3d1d02",
+            "source": {
+              "cell": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
+              "port": "950b0d4c-b147-49fe-9ecb-ad0bcb95e3e8"
+            },
+            "target": {
+              "cell": "b8e7063c-041d-4318-8446-d743b30278ab",
+              "port": "3ee03b57-7151-4583-b42a-09123440367a"
+            },
+            "vertices": []
+          },
+          {
+            "position": {
+              "x": 352.9999999999989,
+              "y": 65
+            },
+            "size": {
+              "width": 100,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "API\nCALLBACK"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "e4cf5c43-ee81-4056-ac4c-d3e5150686ac"
+                },
+                {
+                  "group": "right",
+                  "id": "2804ffa6-2659-40aa-8335-b00987ad5206"
+                },
+                {
+                  "group": "bottom",
+                  "id": "100e63f3-f159-46b0-a0e4-6d27c2eecc4c"
+                },
+                {
+                  "group": "left",
+                  "id": "950b0d4c-b147-49fe-9ecb-ad0bcb95e3e8"
+                }
+              ]
+            },
+            "id": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
+            "zIndex": 11,
+            "data": {
+              "type": "tm.Process",
+              "name": "API\nCALLBACK",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
           }
         ],
         "description": "Data Flow Diagram untuk aplikasi toko online dengan semua komponen, data flows, dan threat identifications"
