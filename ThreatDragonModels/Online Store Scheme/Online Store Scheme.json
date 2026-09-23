@@ -2003,7 +2003,7 @@
             },
             "attrs": {
               "text": {
-                "text": "API\nCALLBACK"
+                "text": "API\nGATEWAY"
               },
               "body": {
                 "stroke": "#333333",
@@ -2099,7 +2099,7 @@
             "zIndex": 11,
             "data": {
               "type": "tm.Process",
-              "name": "API\nCALLBACK",
+              "name": "API\nGATEWAY",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -2110,6 +2110,13 @@
               "isWebApplication": false,
               "privilegeLevel": "",
               "threats": []
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           }
         ],
