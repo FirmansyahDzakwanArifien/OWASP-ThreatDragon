@@ -1906,8 +1906,8 @@
                 "text": "API\nGATEWAY"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -2004,12 +2004,47 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "deb1647e-9790-47fc-b3ed-3ee9c68d6a63",
+                  "title": "Denial of Service - API Gateway Single Point of Failure",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Denial of service",
+                  "description": "API Gateway adalah satu-satunya jalur masuk ke Internal Network, baik untuk trafik Customer/Admin (lewat React Frontend) maupun Payment Gateway (webhook). Jika attacker melakukan flood request atau resource exhaustion ke gateway ini, seluruh sistem backend jadi tidak bisa diakses",
+                  "mitigation": "Rate Limiting per client/IP di level Gateway — Critical\nHorizontal scaling / load balancing multi-instance Gateway — High\nCircuit breaker pattern ke Internal Network — High\nWeb Application Firewall di depan Gateway — High\nHealth check & auto-failover — Medium",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 13,
+                  "score": ""
+                },
+                {
+                  "id": "f725d797-f9f6-49a0-b5be-33aa7e2db9e5",
+                  "title": "Spoofing - Request Forgery Bypass API Gateway",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Spoofing",
+                  "description": "Karena API Gateway jadi titik validasi terpusat sebelum request diteruskan ke Internal Network, attacker berpotensi memalsukan request seolah sudah tervalidasi Gateway untuk mengakses Node.js API Server secara langsung, kalau internal network tidak benar-benar membatasi siapa saja yang boleh menghubunginya",
+                  "mitigation": "Mutual TLS (mTLS) antara API Gateway ↔ Node.js API Server — Critical\nNetwork segmentation — hanya API Gateway yang diizinkan reach Node.js API Server (firewall/security group rule) — Critical\nSigned internal request header dari Gateway ke service internal — High\nDeny akses langsung dari luar ke port internal service — High",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 14,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -2245,6 +2280,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 11
+    "threatTop": 14
   }
 }
