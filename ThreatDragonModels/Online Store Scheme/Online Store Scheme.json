@@ -131,13 +131,6 @@
                 "0e7d5646-189f-4271-b1a2-0900b037207c",
                 "633f8a52-3f7e-4ae5-95ab-f1f3c954a59d"
               ]
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           },
           {
@@ -820,7 +813,7 @@
           },
           {
             "position": {
-              "x": 880,
+              "x": 940,
               "y": 210
             },
             "size": {
@@ -962,7 +955,7 @@
           },
           {
             "position": {
-              "x": 710,
+              "x": 720,
               "y": 50
             },
             "size": {
@@ -1635,8 +1628,8 @@
             },
             "vertices": [
               {
-                "x": 850,
-                "y": 140
+                "x": 870,
+                "y": 160
               }
             ]
           },
@@ -1780,8 +1773,8 @@
             },
             "vertices": [
               {
-                "x": 660,
-                "y": 150
+                "x": 680,
+                "y": 160
               }
             ]
           },
@@ -2054,7 +2047,6 @@
               "cell": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
               "port": "100e63f3-f159-46b0-a0e4-6d27c2eecc4c"
             },
-            "vertices": [],
             "tools": {
               "items": [
                 "boundary",
@@ -2234,7 +2226,8 @@
                 "target-arrowhead"
               ],
               "name": null
-            }
+            },
+            "vertices": []
           }
         ],
         "description": "Data Flow Diagram untuk aplikasi toko online dengan semua komponen, data flows, dan threat identifications"
