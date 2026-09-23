@@ -123,9 +123,7 @@
               "hasOpenThreats": false,
               "crossingFlows": [
                 "947d20f4-3976-40bf-8bec-a7baa3425e52",
-                "b108a7f1-06e0-4603-bccc-3130754b23f1",
-                "c14478ae-c712-4f1b-8c88-53130b735a31",
-                "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f"
+                "c14478ae-c712-4f1b-8c88-53130b735a31"
               ],
               "containedElements": [
                 "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
@@ -493,8 +491,8 @@
           },
           {
             "position": {
-              "x": 352,
-              "y": 190
+              "x": 352.9999999999989,
+              "y": 220
             },
             "size": {
               "width": 100,
@@ -635,8 +633,8 @@
           },
           {
             "position": {
-              "x": 630,
-              "y": 180
+              "x": 640,
+              "y": 190.0000000000005
             },
             "size": {
               "width": 100,
@@ -1097,9 +1095,7 @@
                 "elevationOfPrivilege": 0
               }
             },
-            "children": [
-              "4cad8fd8-394f-44c1-8954-b829f614b865"
-            ]
+            "children": []
           },
           {
             "position": {
@@ -1543,54 +1539,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Cache Operations",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "TCP with AUTH",
-              "threats": [],
-              "trustBoundaryIds": [
-                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
-              ]
-            },
-            "labels": [
-              "Cache Operations"
-            ],
-            "id": "b108a7f1-06e0-4603-bccc-3130754b23f1",
-            "source": {
-              "x": 680,
-              "y": 280
-            },
-            "target": {
-              "cell": "633f8a52-3f7e-4ae5-95ab-f1f3c954a59d",
-              "port": "cf9e5d04-af85-40d2-8a93-3aa6f6eb865f"
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Database Queries",
               "description": "",
               "outOfScope": false,
@@ -1864,7 +1812,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Data Flow",
+              "name": "Email Notification",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -1873,24 +1821,69 @@
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
-              "protocol": "",
+              "protocol": "SMTP TLS",
               "threats": [],
               "trustBoundaryIds": []
             },
             "labels": [
-              "Data Flow"
+              "Email Notification"
             ],
-            "id": "4cad8fd8-394f-44c1-8954-b829f614b865",
+            "id": "0478ba3d-b17c-48fd-afa3-276c09da54c8",
             "source": {
-              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
               "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
             },
             "target": {
-              "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
-              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
+              "cell": "a48fc9b2-99cd-49aa-80a4-2739ef5fd22c",
+              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
             },
-            "vertices": [],
-            "parent": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181"
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Cache Operations",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "TCP with AUTH",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Cache Operations"
+            ],
+            "id": "b108a7f1-06e0-4603-bccc-3130754b23f1",
+            "source": {
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "8d334fc2-eeab-42fc-9942-83fc612dc349"
+            },
+            "target": {
+              "cell": "633f8a52-3f7e-4ae5-95ab-f1f3c954a59d",
+              "port": "cf9e5d04-af85-40d2-8a93-3aa6f6eb865f"
+            },
+            "vertices": []
           },
           {
             "shape": "flow",
@@ -1923,17 +1916,15 @@
               "isPublicNetwork": false,
               "protocol": "",
               "threats": [],
-              "trustBoundaryIds": [
-                "5df934a1-6feb-4bf4-8852-c5b99fd36e24"
-              ]
+              "trustBoundaryIds": []
             },
             "labels": [
               "Token Validation Request"
             ],
             "id": "553c9dc3-bba7-40f4-9414-3fb1bc7d9f0f",
             "source": {
-              "x": 680,
-              "y": 180
+              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
+              "port": "319f073b-6a25-4f26-a2a5-5f8dbde5fdb0"
             },
             "target": {
               "cell": "81bbf437-8b4a-48aa-82fc-3aefa0dfb181",
@@ -1941,56 +1932,10 @@
             },
             "vertices": [
               {
-                "x": 580,
-                "y": 120
+                "x": 620,
+                "y": 130
               }
             ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Email Notification",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "SMTP TLS",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Email Notification"
-            ],
-            "id": "0478ba3d-b17c-48fd-afa3-276c09da54c8",
-            "source": {
-              "cell": "3f345524-4bec-4efd-a52a-b15f8ae7f1b1",
-              "port": "892edc24-b2ad-4f2a-8598-a2088cc6ab05"
-            },
-            "target": {
-              "cell": "a48fc9b2-99cd-49aa-80a4-2739ef5fd22c",
-              "port": "7a73c09b-64c2-46f4-8c87-7417fc4e016d"
-            }
           },
           {
             "position": {
@@ -2110,13 +2055,6 @@
               "isWebApplication": false,
               "privilegeLevel": "",
               "threats": []
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           }
         ],
