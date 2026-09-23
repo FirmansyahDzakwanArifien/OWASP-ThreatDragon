@@ -89,7 +89,8 @@
                 "0088090e-e1fb-4769-a83e-f579aa3d1d02",
                 "24ed5649-428c-4af7-b08f-2505b575b750",
                 "c14478ae-c712-4f1b-8c88-53130b735a31",
-                "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca"
+                "1a07baee-5daf-4f0d-ba99-b0a0b6f458ca",
+                "6a63912f-dffa-4b52-bdfb-0e2802bdbfaf"
               ],
               "containedElements": [
                 "b0f244d4-40a1-4097-b412-a857a8b324bd",
@@ -1889,6 +1890,60 @@
               {
                 "x": 280,
                 "y": 90
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Payment Request & Verification",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "201c916e-de8b-4410-b41a-9ae8914bb96e"
+              ]
+            },
+            "labels": [
+              "Payment Request & Verification"
+            ],
+            "id": "6a63912f-dffa-4b52-bdfb-0e2802bdbfaf",
+            "source": {
+              "x": 720,
+              "y": 260
+            },
+            "target": {
+              "cell": "f6d013b9-4da1-48e7-bf63-70ff9e8ccc6e",
+              "port": "2804ffa6-2659-40aa-8335-b00987ad5206"
+            },
+            "vertices": [
+              {
+                "x": 590,
+                "y": 190
               }
             ]
           },
